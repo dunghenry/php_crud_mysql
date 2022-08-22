@@ -2,13 +2,14 @@
   include 'connect.php';
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     $name = $_POST['name'];
+    $name = str_replace(' ', '', $name);
     $email = $_POST['email'];
     $mobile = $_POST['mobile'];
     $password = $_POST['password'];
     $sql = "insert into `users` (name,email,mobile,password) values('$name','$email','$mobile','$password')";
     $rs = mysqli_query($conn, $sql);
     if($rs){
-      echo "Create user successfully";
+      header('location:display.php');
     }
     else{
       echo "Create user failed";
@@ -21,11 +22,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PHP_MySQL</title>
+    <title>PHP_MYSQL</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   </head>
   <body>
     <div class="container my-5">
+      <h1>ADD USER</h1>
     <form method="post">
       <div class="mb-3">
         <label class="form-label">Name : </label>
@@ -37,7 +39,7 @@
       </div>
       <div class="mb-3">
         <label class="form-label">Phone: </label>
-        <input type="text" name="phone" class="form-control" placeholder="Enter your phone number" autocomplete="off">
+        <input type="text" name="mobile" class="form-control" placeholder="Enter your phone number" autocomplete="off">
       </div>
       <div class="mb-3">
         <label class="form-label">Password: </label>
