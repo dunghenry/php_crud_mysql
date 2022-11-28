@@ -1,10 +1,16 @@
 <?php
-$servername = "localhost";
+//Host local
+
+// $host = "localhost";
+// $password = "";
+
+//Host docker
+$host = "mysql_db";
 $username = "root";
-$password = "";
-$database = "mydb";
-$conn = new mysqli($servername, $username, $password, $database);
+$password = "root";
+$database_name = "mydb";
+$conn = new mysqli($host, $username, $password, $database_name);
 if (!$conn) {
+    echo "Connected to MYSQL error";
     die(mysqli_error($conn));
 }
-?>
