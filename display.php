@@ -1,4 +1,7 @@
-<?php include 'connect.php'; ?>
+<?php include 'connect.php';
+
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -44,27 +47,9 @@
                 <td>' . $password . '</td>
                 <td>
                      <button class="btn btn-primary"><a href="update.php?id=' . $id . '" class="text-light text-decoration-none">Edit</a></button>&nbsp;&nbsp;&nbsp;
-                    <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" onclick=myFunction(' . $id . ') class="btn btn-warning text-light">
                         Delete
                     </button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Notification</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Confirm delete item
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
-                            <button type="button" class="btn btn-danger"><a href="delete.php?id=' . $id . '" class="text-light text-decoration-none">Confirm</a></button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
                 </td>
                </tr>';
           }
@@ -77,6 +62,29 @@
     </table>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+    function myFunction(id) {
+      swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this data!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Deleted successfully!", {
+              icon: "success",
+            });
+            setTimeout(() => {
+              window.location = `delete.php?id=${id}`
+            }, 1000)
+          } else {}
+        });
+
+    }
+  </script>
 </body>
 
 </html>
